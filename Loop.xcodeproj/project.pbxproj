@@ -546,16 +546,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mrkai77/luminare";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 141e83ac2f69074b71b0d470cce0a975e0563dfa;
 			};
 		};
 		2A8EDDBA2F23743B005457F8 /* XCRemoteSwiftPackageReference "Scribe" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SenpaiHunters/Scribe";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = revision;
+				revision = 658180864653457ce201917200bac67ee3eeac87;
 			};
 		};
 		3ED0A7B72F21DF6800A58629 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
