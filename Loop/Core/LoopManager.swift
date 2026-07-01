@@ -474,7 +474,10 @@ extension LoopManager {
     }
 
     private func getNextCycleAction(_ action: WindowAction) async -> WindowAction {
-        guard let currentCycle = action.cycle else {
+        // An empty cycle has no actions to advance to; bail out instead of indexing
+        // into it — the `currentCycle[0]` accesses below would trap on an empty array
+        // (EXC_BREAKPOINT crash when a cycle action is configured with no sub-actions).
+        guard let currentCycle = action.cycle, !currentCycle.isEmpty else {
             return action
         }
 
