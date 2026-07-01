@@ -138,6 +138,17 @@ final class ResizeContext {
         // until the stack overflows.
         needsRecompute = false
 
+        // No-op / no-frame actions (.noAction, .noSelection, .cycle, .minimize, .hide) and
+        // window-focus actions return a zero-size sentinel from `getFrame`. Caching that
+        // sentinel would clobber `cachedTargetFrame.raw`, which grow/shrink/move actions use
+        // as their base frame while nothing has been applied yet (preview-only chords) —
+        // making a subsequent grow resize from a zero-size box at screen center instead of
+        // the window's real frame. Preserve the previously-cached real frame for these.
+        let noFrameActions: [WindowDirection] = [.noAction, .noSelection, .cycle, .minimize, .hide]
+        guard !noFrameActions.contains(action.direction), !action.direction.willFocusWindow else {
+            return
+        }
+
         let result = WindowFrameResolver.getFrame(resizeContext: self)
 
         let normalized = CGRect(
